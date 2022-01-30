@@ -1,2 +1,9 @@
-# companion-module-[replace with module name]
-See [HELP.md](./HELP.md) and [LICENSE](./LICENSE)
+# companion-module-vystem-api
+
+Module for integration with vystem through the API.
+
+## Changes
+
+### v1.0.0
+
+- Initial release

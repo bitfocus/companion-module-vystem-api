@@ -1,0 +1,30 @@
+{
+	"name": "vystem-api",
+	"version": "1.0.0",
+	"api_version": "1.0.0",
+	"description": "vystem",
+	"keywords": [
+		"Eventplatform",
+		"Chat",
+		"Stream"
+	],
+	"manufacturer": "vystem",
+	"product": "vystem Platform",
+	"shortname": "vystem",
+	"homepage": "https://github.com/bitfocus/companion-module-vystem-api#readme",
+	"main": "dist/index.js",
+	"scripts": {
+		"dev": "yarn build:watch",
+		"build": " tsc",
+		"build:main": "tsc -p tsconfig.json",
+		"build:watch": "tsc -p tsconfig.json --watch",
+		"lint": "eslint . --ext .ts",
+		"postinstall": "yarn build"
+	},
+	"author": "Maximilian Mayr <maximilian.mayr@vystem.io>",
+	"license": "MIT",
+	"dependencies": {
+		"axios": "^0.25.0",
+		"typescript": "^3.9.5"
+	}
+}

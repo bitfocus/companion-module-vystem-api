@@ -1,7 +1,4 @@
-
 // Config fields for the web interface
-
-import {CompanionInputField} from "../../../../instance_skel_types";
 
 /**
  * Module configuration structure.
@@ -10,7 +7,6 @@ export interface vystemConfig {
     apikey?: string;
     eventid?: string;
 }
-
 
 export default function getConfigFields() {
     return [

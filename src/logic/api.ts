@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default async function vyRequest(config: { method: "GET" | "POST"| "PATCH", path: string, body?: any }, key: string) {
+export default async function vyRequest(config: { method: "GET" | "POST" | "PATCH", path: string, body?: any }, key: string) {
     const basePath = "https://app.vystem.io/api/v1"
     try {
         const re = await axios.request({

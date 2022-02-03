@@ -5,4 +5,4 @@
 
 
 ### Getting started
-The first thing you will need to do after adding the Twitch instance to Companion is choose whether to use the provided token server, or to use a local token.
+The first thing you will need to do after adding the vystem instance to Companion is adding the eventid and your api token to the configuration of the module.

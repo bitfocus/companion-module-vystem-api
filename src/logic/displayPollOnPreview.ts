@@ -3,7 +3,7 @@ import vyRequest from "./api";
 export async function displayPollOnPreview(options) {
     try {
         await vyRequest({
-            path: "/poll/question/" + options.pollid,
+            path: "/companion/poll/update",
             method: "POST",
             body: {showOnPreviewMonitor: true}
         }, this.config.apikey)

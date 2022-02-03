@@ -4,19 +4,14 @@
 import vyRequest from "./api";
 
 export async function toggleComponent(options) {
-    const event = await vyRequest({
-        path: "/event/get",
-        method: "POST",
-        body: {eventid: this.config.eventid}
-    }, this.config.apikey)
-    const uiComponents = event.data.pages.find(el => el?.name?.toLowerCase() == options?.pagename?.toLowerCase())?.uicomponents
-    if (!uiComponents) this.error("Error finding Page")
-    const componentToToggle = uiComponents.find(el => (el.componentIndex + 1) == options.componentindex)
-    if (!componentToToggle) this.error("Error finding Component")
+    try {
     await vyRequest({
-            path: "/event/pages/component/toggle",
+            path: "/companion/component/toggle",
             method: "POST",
-            body: {componentid: componentToToggle._id}
+            body: {eventid: this.config.eventid, pagename: options?.pagename?.toLowerCase(), componentindex: options.componentindex}
         }, this.config.apikey
-    )
+    )}
+    catch (e) {
+        console.log(e)
+    }
 }

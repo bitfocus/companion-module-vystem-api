@@ -1,5 +1,8 @@
 import getConfigFields, {vystemConfig} from "./definitions/config";
-import {executeAction, getActions} from "./definitions/actions";
+import {executeAction, vyActions} from "./definitions/actions";
+import {initVyVars} from "./logic/variables";
+import {vyVariables} from "./definitions/variables";
+import {verifyConfig} from "./logic/config";
 import instance_skel = require('../../../instance_skel');
 
 /**
@@ -13,9 +16,11 @@ class VystemInstance extends instance_skel<vystemConfig> {
 
     // Called when instance is created
     init() {
-        this.actions();
+        this.verifyConfig();
+        this.setActions(vyActions);
+        this.setVariableDefinitions(vyVariables);
+        this.initVariables();
     }
-
 
     // Set fields for instance configuration in the web
     config_fields(): any[] {
@@ -23,13 +28,9 @@ class VystemInstance extends instance_skel<vystemConfig> {
     }
 
     // Execute an action
+    // function called by companion
     action(action) {
         executeAction.bind(this)(action);
-    }
-
-    // Set available actions
-    actions() {
-        this.system.emit('instance_actions', this.id, getActions.bind(this)());
     }
 
     //Clean up intance before it is destroyed
@@ -38,6 +39,19 @@ class VystemInstance extends instance_skel<vystemConfig> {
     }
 
     updateConfig(config) {
+        this.config = config;
+        this.log('debug', 'Restarting vystem module after reconfiguration');
+        this.initVariables()
+        this.verifyConfig()
+    }
+
+    // inits all defined variables with default data
+    initVariables() {
+        initVyVars.bind(this)();
+    }
+
+    verifyConfig() {
+        verifyConfig.bind(this)()
     }
 }
 

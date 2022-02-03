@@ -3,7 +3,7 @@ import vyRequest from "./api";
 export async function togglePoll(options) {
     try {
         await vyRequest({
-            path: "/poll/question/" + options.pollid,
+            path: "/companion/poll/update",
             method: "POST",
             body: {isActive: options.pollstatus == '1'}
         }, this.config.apikey)

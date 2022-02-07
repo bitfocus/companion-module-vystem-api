@@ -6,6 +6,7 @@ import {displayPollOnPreview} from "../logic/displayPollOnPreview";
 import {addOutputElement, clearOutput, removeOutputElement} from "../logic/outputElement";
 import {changeOutputFontsize} from "../logic/changeOutputFontsize";
 import {startOutputCountdown} from "../logic/startOutputCountdown";
+import {sendBroadcast} from "../logic/sendBroadcast";
 
 export const interactionTypes = [
     {id: 'chat', label: 'Chat'},
@@ -62,6 +63,28 @@ export const vyActions: any = {
                 choices: [
                     {id: '1', label: 'Toggle'},
                     {id: '0', label: 'Untoggle'},
+                ],
+            }
+        ]
+    },
+    sendBroadcast: {
+        label: 'Send a broadcast to all Event Attendees',
+        options: [
+            {
+                type: 'textinput',
+                label: 'Message',
+                id: 'message',
+                tooltip: 'The message to post in the broadcast. If it is a Dialog the message supports HTML formatting.',
+            },
+            {
+                type: 'dropdown',
+                label: 'Message Type',
+                id: 'type',
+                default: 'snackbar',
+                tooltip: 'Should the poll be toggled or untoggled?',
+                choices: [
+                    {id: 'snackbar', label: 'Snackbar'},
+                    {id: 'dialog', label: 'Dialog'},
                 ],
             }
         ]
@@ -249,6 +272,10 @@ export function executeAction(action) {
         }
         case 'setStageInteractionTypes': {
             setStageInteractionTypes.bind(this)(action.options);
+            break;
+        }
+        case 'sendBroadcast': {
+            sendBroadcast.bind(this)(action.options);
             break;
         }
         default: {

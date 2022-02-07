@@ -4,6 +4,8 @@ import {togglePoll} from "../logic/togglePoll";
 import {togglePublishPoll} from "../logic/togglePublishPoll";
 import {displayPollOnPreview} from "../logic/displayPollOnPreview";
 import {addOutputElement, clearOutput, removeOutputElement} from "../logic/outputElement";
+import {changeOutputFontsize} from "../logic/changeOutputFontsize";
+import {startOutputCountdown} from "../logic/startOutputCountdown";
 
 export const interactionTypes = [
     {id: 'chat', label: 'Chat'},
@@ -31,7 +33,7 @@ export const vyActions: any = {
                 type: 'textinput',
                 label: 'Page Name',
                 id: 'pagename',
-                tooltip: 'Fill in the name of the page the component is located on.',
+                tooltip: 'Fill in the name of the page the component is located on. (Optional)',
             }, {
                 type: 'number',
                 label: 'Component Index',
@@ -48,6 +50,7 @@ export const vyActions: any = {
                 type: 'textinput',
                 label: 'Poll Id',
                 id: 'pollid',
+                regex: '/^[a-f\\d]{24}$/i',
                 tooltip: 'Fill in the id of the poll',
             },
             {
@@ -70,6 +73,7 @@ export const vyActions: any = {
                 type: 'textinput',
                 label: 'Poll Id',
                 id: 'pollid',
+                regex: '/^[a-f\\d]{24}$/i',
                 tooltip: 'Fill in the id of the poll',
             },
             {
@@ -92,6 +96,7 @@ export const vyActions: any = {
                 type: 'textinput',
                 label: 'Poll Id',
                 id: 'pollid',
+                regex: '/^[a-f\\d]{24}$/i',
                 tooltip: 'Fill in the id of the poll',
             }
         ]
@@ -151,6 +156,40 @@ export const vyActions: any = {
             }
         ]
     },
+    changeOutputFontsize: {
+        label: 'Change Fontsize of OUTPUT',
+        options: [
+            {
+                type: 'textinput',
+                label: 'OUTPUT ID',
+                id: 'outputid',
+                tooltip: 'Fill in the ID of the OUTPUT to change elements on',
+            },
+            {
+                type: 'number',
+                label: 'Factor',
+                id: 'factor',
+                tooltip: 'Fill in the factor the font should be increased or decreased. e.g. -10 or 10',
+            }
+        ]
+    },
+    startOutputCountdown: {
+        label: 'Start a Countdown Timer on OUTPUT',
+        options: [
+            {
+                type: 'textinput',
+                label: 'OUTPUT ID',
+                id: 'outputid',
+                tooltip: 'Fill in the ID of the OUTPUT to change elements on',
+            },
+            {
+                type: 'number',
+                label: 'Length in Seconds',
+                id: 'factor',
+                tooltip: 'The length of the timer in seconds. E.g.300 for 5 Minutes',
+            }
+        ]
+    },
     setStageInteractionTypes: {
         label: 'Set Interaction Options for a stage',
         options: [
@@ -171,21 +210,49 @@ export const vyActions: any = {
 };
 
 export function executeAction(action) {
-    if (action.action === 'toggleComponent') {
-        toggleComponent.bind(this)(action.options);
-    } else if (action.action === 'addOutputElement') {
-        addOutputElement.bind(this)(action.options);
-    } else if (action.action === 'removeOutputElement') {
-        removeOutputElement.bind(this)(action.options);
-    } else if (action.action === 'togglePoll') {
-        togglePoll.bind(this)(action.options);
-    } else if (action.action === 'togglePublishPoll') {
-        togglePublishPoll.bind(this)(action.options);
-    } else if (action.action === 'displayPollOnPreview') {
-        displayPollOnPreview.bind(this)(action.options);
-    } else if (action.action === 'clearOutput') {
-        clearOutput.bind(this)(action.options);
-    } else if (action.action === 'setStageInteractionTypes') {
-        setStageInteractionTypes.bind(this)(action.options);
+    switch (action.action) {
+        case 'toggleComponent': {
+            toggleComponent.bind(this)(action.options);
+            break;
+        }
+        case 'addOutputElement': {
+            addOutputElement.bind(this)(action.options);
+            break;
+        }
+        case 'removeOutputElement': {
+            removeOutputElement.bind(this)(action.options);
+            break;
+        }
+        case 'togglePoll': {
+            togglePoll.bind(this)(action.options);
+            break;
+        }
+        case 'togglePublishPoll': {
+            togglePublishPoll.bind(this)(action.options);
+            break;
+        }
+        case 'displayPollOnPreview': {
+            displayPollOnPreview.bind(this)(action.options);
+            break;
+        }
+        case 'clearOutput': {
+            clearOutput.bind(this)(action.options);
+            break;
+        }
+        case 'changeOutputFontsize': {
+            changeOutputFontsize.bind(this)(action.options);
+            break;
+        }
+        case 'startOutputCountdown': {
+            startOutputCountdown.bind(this)(action.options);
+            break;
+        }
+        case 'setStageInteractionTypes': {
+            setStageInteractionTypes.bind(this)(action.options);
+            break;
+        }
+        default: {
+            break;
+        }
     }
 }

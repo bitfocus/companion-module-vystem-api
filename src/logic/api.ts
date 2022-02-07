@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default async function vyRequest(config: { method: "GET" | "POST" | "PATCH", path: string, body?: any }, key: string, force?: boolean) {
-    const basePath = "https://app.vystem.io/api/v1"
+    const basePath = "https://develop.app.vystem.io/api/v1"
     try {
         const re = await axios.request({
             method: config.method,

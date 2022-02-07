@@ -27,7 +27,7 @@ export async function removeOutputElement(options) {
             path: "/companion/output/" + options.outputid,
             method: "GET"
         }, this.config.apikey)
-        const pageid = event.data.pages.find(el => el?.name?.toLowerCase() == options?.pagename?.toLowerCase())?._id
+        const pageid = _getPageIdForPagename(event.data, options?.pagename)
         const activeContent = output.activeContent.filter(curr => curr !== `${outputElements.find(el => el.id == options.outputelement).scope == "page" ? pageid : this.config.eventid}-${options.outputelement}`)
         await vyRequest({
             path: "/companion/output/activecontent",
@@ -51,8 +51,8 @@ export async function addOutputElement(options) {
             path: "/companion/output/" + options.outputid,
             method: "GET"
         }, this.config.apikey)
-        const pageid = event.data.pages.find(el => el?.name?.toLowerCase() == options?.pagename?.toLowerCase())?._id
-        const activeContent = output.activeContent;
+        const pageid = _getPageIdForPagename(event.data, options?.pagename)
+        const activeContent = output.activeContent || [];
         activeContent.push(`${outputElements.find(el => el.id == options.outputelement).scope == "page" ? pageid : this.config.eventid}-${options.outputelement}`)
         await vyRequest({
             path: "/companion/output/activecontent",
@@ -62,4 +62,8 @@ export async function addOutputElement(options) {
     } catch (e) {
         console.log(e)
     }
+}
+
+function _getPageIdForPagename(eventEntity: any, pagename: string) {
+    return eventEntity.pages.find(el => el?.name?.toLowerCase() == pagename.toLowerCase())?._id
 }

@@ -1,4 +1,4 @@
-import getConfigFields, {vystemConfig} from "./definitions/config";
+import getConfigFields, {VystemConfig} from "./definitions/config";
 import {executeAction, vyActions} from "./definitions/actions";
 import {initVyVars} from "./logic/variables";
 import {vyVariables} from "./definitions/variables";
@@ -8,7 +8,7 @@ import instance_skel = require('../../../instance_skel');
 /**
  * Companion instance class for vystem API
  */
-class VystemInstance extends instance_skel<vystemConfig> {
+class VystemInstance extends instance_skel<VystemConfig> {
 
     constructor(system, id, config) {
         super(system, id, config)

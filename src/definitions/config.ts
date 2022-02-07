@@ -3,7 +3,7 @@
 /**
  * Module configuration structure.
  */
-export interface vystemConfig {
+export interface VystemConfig {
     apikey?: string;
     eventid?: string;
 }

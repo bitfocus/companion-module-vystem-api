@@ -24,7 +24,7 @@ export async function removeOutputElement(options) {
             body: {eventid: this.config.eventid}
         }, this.config.apikey)
         const output = await vyRequest({
-            path: "/companion/output/get/" + options.outputid,
+            path: "/companion/output/" + options.outputid,
             method: "GET"
         }, this.config.apikey)
         const pageid = event.data.pages.find(el => el?.name?.toLowerCase() == options?.pagename?.toLowerCase())?._id
@@ -48,7 +48,7 @@ export async function addOutputElement(options) {
             body: {eventid: this.config.eventid}
         }, this.config.apikey)
         const output = await vyRequest({
-            path: "/companion/output/get/" + options.outputid,
+            path: "/companion/output/" + options.outputid,
             method: "GET"
         }, this.config.apikey)
         const pageid = event.data.pages.find(el => el?.name?.toLowerCase() == options?.pagename?.toLowerCase())?._id

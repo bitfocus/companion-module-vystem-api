@@ -11,10 +11,12 @@ export default async function vyRequest(config: { method: "GET" | "POST" | "PATC
         })
         return re.data;
     } catch (e) {
-        if (force)
+        if (force) {
             throw e
-        else
+        } else {
             console.log(e.response.data)
+            // this.log("warn", `failing API request to: '${config.path}' : ${e?.response?.data ? JSON.stringify(e.response.data) : e.toString()}`)
+        }
     }
 }
 

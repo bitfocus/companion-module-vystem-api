@@ -7,6 +7,7 @@ import {addOutputElement, clearOutput, removeOutputElement} from "../logic/outpu
 import {changeOutputFontsize} from "../logic/changeOutputFontsize";
 import {startOutputCountdown} from "../logic/startOutputCountdown";
 import {sendBroadcast} from "../logic/sendBroadcast";
+import {changeQAQuestion} from "../logic/changeQAQuestion";
 
 export const interactionTypes = [
     {id: 'chat', label: 'Chat'},
@@ -208,7 +209,7 @@ export const vyActions: any = {
             {
                 type: 'number',
                 label: 'Length in Seconds',
-                id: 'factor',
+                id: 'value',
                 tooltip: 'The length of the timer in seconds. E.g.300 for 5 Minutes',
             }
         ]
@@ -227,6 +228,26 @@ export const vyActions: any = {
                 id: 'interactiontypes',
                 tooltip: 'Which interaction types should be visible?',
                 choices: interactionTypes
+            }
+        ]
+    },
+    changeQAQuestion: {
+        label: 'Change Q&A Question on preview',
+        options: [
+            {
+                type: 'textinput',
+                label: 'Page Name',
+                id: 'pagename',
+                tooltip: 'Fill in the name of the page the question should be changed on.',
+            }, {
+                type: 'dropdown',
+                label: 'Direction',
+                id: 'direction',
+                default: "next",
+                choices: [
+                    {id: 'next', label: 'Next Question'},
+                    {id: 'prior', label: 'Prior Question'}
+                ]
             }
         ]
     },
@@ -276,6 +297,10 @@ export function executeAction(action) {
         }
         case 'sendBroadcast': {
             sendBroadcast.bind(this)(action.options);
+            break;
+        }
+        case 'changeQAQuestion': {
+            changeQAQuestion.bind(this)(action.options);
             break;
         }
         default: {

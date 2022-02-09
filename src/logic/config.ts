@@ -10,6 +10,7 @@ export async function verifyConfig() {
         }, this.config.apikey,true)
         this.status(this.STATUS_OK);
     } catch (e) {
+        this.log("error", "/event/get : " + e.toString())
         this.status(this.STATUS_ERROR);
     }
     try {
@@ -18,6 +19,7 @@ export async function verifyConfig() {
             method: "POST",
         }, this.config.apikey, true)
     } catch (e) {
+        this.log("error", "/auth/get : " + e.toString())
         this.status(this.STATUS_ERROR);
     }
 }

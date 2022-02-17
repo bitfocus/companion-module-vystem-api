@@ -14,7 +14,10 @@ class VystemInstance extends instance_skel<VystemConfig> {
         super(system, id, config)
     }
 
-    // Called when instance is created
+    /**
+     * Main initialization function called by companion once the module
+     * is OK to start doing things.
+     */
     init() {
         this.verifyConfig();
         this.setActions(vyActions);
@@ -23,21 +26,42 @@ class VystemInstance extends instance_skel<VystemConfig> {
     }
 
     // Set fields for instance configuration in the web
+    /**
+     * Set fields for instance configuration in the web
+     * Called by companion.
+     *
+     * @returns {Array} the config fields
+     */
     config_fields(): any[] {
         return getConfigFields();
     }
 
     // Execute an action
     // function called by companion
+    /**
+     * Executes the provided action.
+     * Called by companion.
+     *
+     * @param {Object} action - the action to be executed
+     */
     action(action) {
         executeAction.bind(this)(action);
     }
 
-    //Clean up intance before it is destroyed
+    /**
+     * Clean up the instance before it is destroyed.
+     * Called by companion.
+     */
     destroy() {
         this.debug('DESTROY', this.id);
     }
 
+    /**
+     * Process an updated configuration array.
+     * Called by companion.
+     *
+     * @param {Object} config - the new configuration
+     */
     updateConfig(config) {
         this.config = config;
         this.log('debug', 'Restarting vystem module after reconfiguration');
@@ -45,11 +69,18 @@ class VystemInstance extends instance_skel<VystemConfig> {
         this.verifyConfig()
     }
 
-    // inits all defined variables with default data
+
+    /**
+     * INTERNAL: initialize variables.
+     */
     initVariables() {
         initVyVars.bind(this)();
     }
 
+    /**
+     * INTERNAL: verifies the entered config variables
+     * after verifying the STATUS of the instance is set accordingly
+     */
     verifyConfig() {
         verifyConfig.bind(this)()
     }

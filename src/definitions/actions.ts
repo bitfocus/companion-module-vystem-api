@@ -23,6 +23,7 @@ export const outputElements = [
     {id: 'poll', label: 'Polls', scope: "event"},
     {id: 'countdown', label: 'Countdown', scope: "event"},
     {id: 'wordcloud', label: 'Wordcloud', scope: "page"},
+    {id: 'usercount', label: 'Live user count', scope: "page"},
     {id: 'reaction', label: 'Emojis', scope: "page"},
     {id: 'pageqr', label: 'Hybrid QR Code', scope: "page"}
 ]

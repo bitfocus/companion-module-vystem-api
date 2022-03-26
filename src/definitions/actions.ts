@@ -22,6 +22,7 @@ export const outputElements = [
     {id: 'qa', label: 'Q&A', scope: "page"},
     {id: 'poll', label: 'Polls', scope: "event"},
     {id: 'countdown', label: 'Countdown', scope: "event"},
+    {id: 'time', label: 'Current Time', scope: "event"},
     {id: 'wordcloud', label: 'Wordcloud', scope: "page"},
     {id: 'usercount', label: 'Live user count', scope: "page"},
     {id: 'reaction', label: 'Emojis', scope: "page"},

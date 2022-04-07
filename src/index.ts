@@ -74,6 +74,7 @@ class VystemInstance extends instance_skel<VystemConfig> {
         this.log('debug', 'Restarting vystem module after reconfiguration');
         this.initVariables()
         this.setupVYActions()
+        this.updateChoices()
         this.verifyConfig()
     }
 

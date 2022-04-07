@@ -384,7 +384,7 @@ class VystemInstance extends instance_skel<VystemConfig> {
                 return {id: el.name, label: el.name}
             })
             res = await vyRequest({
-                    path: "/output/event/" + this.config.eventid,
+                    path: "/companion/output/event/" + this.config.eventid,
                     method: "GET",
                 }, this.config.apikey
             );

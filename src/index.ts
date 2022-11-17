@@ -389,7 +389,7 @@ class VystemInstance extends instance_skel<VystemConfig> {
                 }, this.config.apikey
             );
             this.CHOICES_OUTPUTS = res.data.map(el => {
-                return {id: el.outputId, label: el.name}
+                return {id: el.outputId, label: `${el.name} (${el.outputId})`}
             })
 
             this.setupVYActions() // reinit actions to update list

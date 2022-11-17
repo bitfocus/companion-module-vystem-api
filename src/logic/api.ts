@@ -1,5 +1,11 @@
 import axios from "axios";
 
+/**
+ * do a basic api request to the vystem api
+ * @param config
+ * @param key the api key
+ * @param force
+ */
 export default async function vyRequest(config: { method: "GET" | "POST" | "PATCH", path: string, body?: any }, key: string, force?: boolean) {
     const basePath = "https://api.app.vystem.io/api/v1"
     try {
